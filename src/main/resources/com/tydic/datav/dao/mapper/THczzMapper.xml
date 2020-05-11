@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tydic.datav.dao.mapper.THczzMapper">
+	<resultMap id="BaseResultMap"
+		type="com.tydic.datav.dao.po.THczz">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="mc" property="mc" jdbcType="VARCHAR" />
+		<result column="sz" property="sz" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, mc, sz
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.tydic.datav.dao.po.THczzExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_hczz where status = 1
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_hczz
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_hczz
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.tydic.datav.dao.po.THczzExample">
+		delete from t_hczz
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="com.tydic.datav.dao.po.THczz">
+		insert into t_hczz (id, mc, sz)
+		values
+		(#{id,jdbcType=VARCHAR}, #{mc,jdbcType=VARCHAR},
+		#{sz,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateStatus">
+		update t_hczz set status = '0'
+		
+	</update>
+	
+	<insert id="insertSelective"
+		parameterType="com.tydic.datav.dao.po.THczz">
+		insert into t_hczz
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="mc != null">
+				mc,
+			</if>
+			<if test="sz != null">
+				sz,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="mc != null">
+				#{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="sz != null">
+				#{sz,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.tydic.datav.dao.po.THczzExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_hczz
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_hczz
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mc != null">
+				mc = #{record.mc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sz != null">
+				sz = #{record.sz,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_hczz
+		set id = #{record.id,jdbcType=VARCHAR},
+		mc =
+		#{record.mc,jdbcType=VARCHAR},
+		sz = #{record.sz,jdbcType=VARCHAR},
+		
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tydic.datav.dao.po.THczz">
+		update t_hczz
+		<set>
+			<if test="mc != null">
+				mc = #{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="sz != null">
+				sz = #{sz,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.tydic.datav.dao.po.THczz">
+		update t_hczz
+		set mc = #{mc,jdbcType=VARCHAR},
+		sz =
+		#{sz,jdbcType=VARCHAR},
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select resultMap="BaseResultMap"
+		parameterType="com.tydic.datav.dao.po.THczzExample"
+		id="selectByExampleWithRowbounds">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_hczz
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+</mapper>

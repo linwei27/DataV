@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- mybatis-generator:generate -->
+
+    <context id="context1" targetRuntime="MyBatis3">
+
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        
+        <commentGenerator>
+            <property name="suppressDate" value="false"></property>
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+
+       <jdbcConnection  driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="root">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.tydic.datav.dao.po" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="com.tydic.datav.dao.mapper" targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="com.tydic.datav.dao.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+        <table schema="t_zdrk_photo" tableName="t_zdrk_photo"/>
+
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tydic.datav.dao.mapper.TZbmjpbjhMapper">
+	<resultMap id="BaseResultMap"
+		type="com.tydic.datav.dao.po.TZbmjpbjh">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="sj" property="sj" jdbcType="VARCHAR" />
+		<result column="gw" property="gw" jdbcType="VARCHAR" />
+		<result column="mc" property="mc" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="ord" property="ord" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, sj, gw,mc,tel,ord
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjhExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_zbmjpbjh
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_zbmjpbjh
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+ 
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_zbmjpbjh
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	
+	<delete id="deleteByExample"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjhExample">
+		delete from t_zbmjpbjh
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	
+	
+	<!--  
+	<delete id="deletebysj"
+		parameterType="java.lang.String">
+		delete t_zbmjpbjh where sj = #{sj,jdbcType=VARCHAR}
+	</delete>
+	-->
+	
+	<insert id="insert"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjh">
+		insert into t_zbmjpbjh (id, sj, gw, mc,tel,ord)
+		values (#{id,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR},
+		#{gw,jdbcType=VARCHAR},
+		#{mc,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},#{ord,jdbcType=INTEGER})
+	</insert>
+	
+	<!-- 插入之前更新标志位 -->
+	<update id="updateStatus">
+		update t_zbmjpbjh set bz = 0
+	</update>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjh">
+		insert into t_zbmjpbjh
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="sj != null">
+				sj,
+			</if>
+			<if test="gw != null">
+				gw,
+			</if>
+			<if test="mc != null">
+				mc,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="ord != null">
+				ord,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="sj != null">
+				#{sj,jdbcType=VARCHAR},
+			</if>
+			<if test="gw != null">
+				#{gw,jdbcType=VARCHAR},
+			</if>
+			<if test="mc != null">
+				#{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="ord != null">
+				#{ord,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjhExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_zbmjpbjh
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_zbmjpbjh
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sj != null">
+				sj = #{record.sj,jdbcType=VARCHAR},
+			</if>
+			<if test="record.gw != null">
+				gw = #{record.gw,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mc != null">
+				mc = #{record.mc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mc != null">
+				mc = #{record.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ord != null">
+				ord = #{record.ord,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_zbmjpbjh
+		set id = #{record.id,jdbcType=VARCHAR},
+		sj = #{record.sj,jdbcType=VARCHAR},
+		gw = #{record.gw,jdbcType=VARCHAR},
+		mc = #{record.mc,jdbcType=VARCHAR},
+		tel = #{record.tel,jdbcType=VARCHAR},
+		ord = #{record.ord,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjh">
+		update t_zbmjpbjh
+		<set>
+			<if test="sj != null">
+				sj = #{sj,jdbcType=VARCHAR},
+			</if>
+			<if test="gw != null">
+				gw = #{gw,jdbcType=VARCHAR},
+			</if>
+			<if test="tel_1 != null">
+				mc = #{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="ypmj != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="ord != null">
+				ord = #{ord,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjh">
+		update t_zbmjpbjh
+		set sj = #{sj,jdbcType=VARCHAR},
+		gw = #{gw,jdbcType=VARCHAR},
+		mc = #{mc,jdbcType=VARCHAR},
+		tel = #{tel,jdbcType=VARCHAR},
+		ord = #{ord,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select resultMap="BaseResultMap"
+		parameterType="com.tydic.datav.dao.po.TZbmjpbjhExample"
+		id="selectByExampleWithRowbounds">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_zbmjpbjh
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+</mapper>
