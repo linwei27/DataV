@@ -9,8 +9,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.io.File;
-
 import javax.servlet.MultipartConfigElement;
 
 
@@ -52,7 +50,8 @@ public class DataVApplication extends SpringBootServletInitializer {
 //			tmpFile.mkdirs();
 //		}
 //        factory.setLocation(location);
-        factory.setLocation("/data/dubbo/cache");
+//        factory.setLocation("/data/dubbo/cache");
+        factory.setLocation("D:/temp/data/dubbo/cache");
         return factory.createMultipartConfig();
     }
 }
