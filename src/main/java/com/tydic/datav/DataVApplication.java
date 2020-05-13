@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.MultipartConfigElement;
+import java.io.File;
 
 
 @SpringBootApplication( scanBasePackages = {
@@ -45,13 +46,14 @@ public class DataVApplication extends SpringBootServletInitializer {
         // 设置总上传数据总大小
         factory.setMaxRequestSize("2500MB");
 //        String location = System.getProperty("user.dir") + "/data/dubbo/cache";
-//        File tmpFile = new File(location);
-//        if (!tmpFile.exists()) {
-//			tmpFile.mkdirs();
-//		}
-//        factory.setLocation(location);
+        String location = "D:/temp/data/dubbo/cache";
+        File tmpFile = new File(location);
+        if (!tmpFile.exists()) {
+			tmpFile.mkdirs();
+		}
+        factory.setLocation(location);
 //        factory.setLocation("/data/dubbo/cache");
-        factory.setLocation("D:/temp/data/dubbo/cache");
+        //factory.setLocation("D:/temp/data/dubbo/cache");
         return factory.createMultipartConfig();
     }
 }
